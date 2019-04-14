@@ -14,9 +14,9 @@
         <div class="header d-flex justify-content-between align-items-center">
             <h1>Welcome to PIGGI Bank Locker Service</h1>
             <?php if(isset($_SESSION['username'])) {?>
-                <a class="btn btn-primary" href="/">Apply for locker</a>
+                <a id="applyLocker" class="btn btn-primary" href="/applied-locker?userId=<?php echo $_SESSION['username']; ?>">Apply for locker</a>
             <?php } else { ?>
-                <a class="btn btn-primary" href="/">Login</a>
+                <a id="applyLocker" class="btn btn-primary" href="/">Login</a>
             <?php } ?>
         </div>
         <div class="h3 text-info mt30">Lockers</div>
@@ -38,6 +38,7 @@
             <div class="h3 text-info">Charges: </div>
             <ul>
                 <li>Bank charges <strong>yearly rent Rs. 2400/- only</strong> for the locker from the customer which is directly deducted from the account of the customer.</li>
+                <li>After 12 free operations, <strong>Rs. 100 per operation </strong> will be charged. This amount will be deducted from your account, in the end of the year.</li>
             </ul>
         </article>
     </div>

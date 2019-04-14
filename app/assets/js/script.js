@@ -30,6 +30,12 @@ $(document).ready(function() {
                 console.log(response)
             } 
         })
-    })
+    });
+
+    $("#applyLocker").click(function() {
+        
+    });
+
+
     
 });

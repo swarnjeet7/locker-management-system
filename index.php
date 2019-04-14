@@ -28,6 +28,9 @@
     } else if($URL === '/apply-for-locker') {
         include(ROOT.'/app/locker.php');
         exit();
+    } else if($URL === '/applied-locker') {
+        include(APP.'/applied-locker.php');
+        exit();
     } else {
         echo 'Sorry, This page not found';
         exit();
