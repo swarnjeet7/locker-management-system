@@ -14,7 +14,7 @@
         <h1>Welcome to PIGGI Bank</h1>
         <div class="input-group">
             <label for="inputId" class="sr-only">User Id</label>
-            <input id="inputId" type="number" class="form-control" placeholder="Please enter your account number" required autofocus>
+            <input id="inputId" type="number" class="form-control" placeholder="Account number" required autofocus>
         </div>
         <div class="input-group">
             <label for="inputPassword" class="sr-only">Password</label>

@@ -1,32 +1,34 @@
 <?php
     require_once('app/config/config.php');
-
+ 
     session_start();
+    $loginId = isset($_SESSION['accId']);
+    
 
     $requestUri = $_SERVER['REQUEST_URI'];
     $URL = strtok($_SERVER["REQUEST_URI"], '?');
 
     if($URL === '/') {
-        if(isset($_SESSION['username'])) {
-            header("Location: ".'/customers/'. $_SESSION['username']);
+        if($loginId) {
+            header("Location: ".'/customers/'.$loginId);
         }
-        include(ROOT.'/app/home.php');
+        include(APP.'/home.php');
         exit();
     } else if(preg_match('/\/customers\/\d+$/', $URL)) {
-        if(!isset($_SESSION['username'])) {
+        if(!$loginId) {
             header("Location: ".WEB_DOMAIN_URL);
         }
-        $userId = $_SESSION['username'];
-        include(ROOT.'/app/customers.php');
+        // $userId = $_SESSION['username'];
+        include(APP.'/customers.php');
         exit();
     } else if($URL === '/api/login') {
-        include(ROOT.'/api/login.php');
+        include(APP.'/api/login.php');
         exit();
     } else if($URL === '/api/logout') {
-        include(ROOT.'/api/logout.php');
+        include(APP.'/api/logout.php');
         exit();
     } else if($URL === '/apply-for-locker') {
-        include(ROOT.'/app/locker.php');
+        include(APP.'/locker.php');
         exit();
     } else if($URL === '/applied-locker') {
         include(APP.'/applied-locker.php');

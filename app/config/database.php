@@ -2,7 +2,7 @@
     class DB {
         private $pdo;
         private $host = 'localhost';
-        private $db_name = 'mybank';
+        private $db_name = 'piggibank';
         private $username = 'root';
         private $password = 'root123';
 
@@ -24,13 +24,5 @@
                 return $data;
             }
         }
-
-
-
-
-
-
-
-
     }
 ?>

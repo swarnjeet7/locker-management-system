@@ -15,7 +15,7 @@ $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: '/api/login',
-            data: JSON.stringify({username: userId, password: pwd}),
+            data: JSON.stringify({accId: userId, password: pwd}),
             success: function(response) {
                 const res = JSON.parse(response);
                 if(res.status == 'success') {
