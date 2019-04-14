@@ -2,9 +2,9 @@
     class DB {
         private $pdo;
         private $host = 'localhost';
-        private $db_name = 'piggiBank';
+        private $db_name = 'piggibank';
         private $username = 'root';
-        private $password = '';
+        private $password = 'root123';
 
         public function __construct() {
             try {

@@ -18,7 +18,6 @@
                     "code" => 200
                 );
                 echo json_encode($response);
-                session_start();
                 $_SESSION['accId']= $accountId;
                 $_SESSION['customerId']= $customerId;
                 http_response_code(200);

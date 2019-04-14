@@ -16,6 +16,19 @@
         define("WEB_DOMAIN_URL", 'http://'.WEB_DOMAIN);
     }
 
-    // echo WEB_DOMAIN_URL; die;
+    if(!define('LOCKER_PENDING', 1)) {
+        define('LOCKER_PENDING', 1);
+    }
 
+    if(!define('LOCKER_ACTIVE', 2)) {
+        define('LOCKER_ACTIVE', 2);
+    }
+
+    if(!define('LOCKER_DEACTIVE', 3)) {
+        define('LOCKER_DEACTIVE', 3);
+    }
+
+    if(!define('LOCKER_STATUS', serialize(array('LOCKER_PENDING' => LOCKER_PENDING, 'LOCKER_ACTIVE' => LOCKER_ACTIVE, 'LOCKER_DEACTIVE' => LOCKER_DEACTIVE )))) {
+        define('LOCKER_STATUS', serialize(array('LOCKER_PENDING' => LOCKER_PENDING, 'LOCKER_ACTIVE' => LOCKER_ACTIVE, 'LOCKER_DEACTIVE' => LOCKER_DEACTIVE )));
+    }
 ?>

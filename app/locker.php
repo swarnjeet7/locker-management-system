@@ -14,9 +14,9 @@
         <div class="header d-flex justify-content-between align-items-center">
             <h1>Welcome to PIGGI Bank Locker Service</h1>
             <?php if(isset($_SESSION['accId'])) {?>
-                <a id="applyLocker" class="btn btn-primary" href="/apply-for-locker?userId=<?php echo $_SESSION['accId']; ?>">Apply for locker</a>
+                <a class="btn btn-primary" href="/apply-for-locker?userId=<?php echo $_SESSION['accId']; ?>">Apply for locker</a>
             <?php } else { ?>
-                <a id="applyLocker" class="btn btn-primary" href="/">Login</a>
+                <a class="btn btn-primary" href="/">Login</a>
             <?php } ?>
         </div>
         <div class="h3 text-info mt30">Lockers</div>
