@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/app/assets/css/bootstrap.css" />
     <link rel="stylesheet" href="/app/assets/css/main.css" />
 </head>
-<body>
+<body class="home-body">
     <form class="form-signin custom-form" onsubmit="return false;">
         <h1>Welcome to PIGGI Bank</h1>
         <div class="input-group">

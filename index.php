@@ -1,27 +1,35 @@
 <?php
-    if(!define("ROOTPATH", dirname(__FILE__))) {
-        define("ROOTPATH", dirname(__FILE__));
-    }
-    if(!define("ROOT", $_SERVER['DOCUMENT_ROOT'])) {
-        define("ROOT", $_SERVER['DOCUMENT_ROOT']);
-    }
-    if(!define("APP", ROOT.'/app')) {
-        define("APP", ROOT.'/app');
-    }
-    
+    require_once('app/config/config.php');
+
+    session_start();
+
     $requestUri = $_SERVER['REQUEST_URI'];
     $URL = strtok($_SERVER["REQUEST_URI"], '?');
+
     if($URL === '/') {
+        if(isset($_SESSION['username'])) {
+            header("Location: ".'/customers/'. $_SESSION['username']);
+        }
         include(ROOT.'/app/home.php');
         exit();
-    }
-    echo $URL; die;
-    if($URL === '/customers/125701') {
+    } else if(preg_match('/\/customers\/\d+$/', $URL)) {
+        if(!isset($_SESSION['username'])) {
+            header("Location: ".WEB_DOMAIN_URL);
+        }
+        $userId = $_SESSION['username'];
         include(ROOT.'/app/customers.php');
         exit();
-    }
-    if($URL === '/api/login') {
+    } else if($URL === '/api/login') {
         include(ROOT.'/api/login.php');
+        exit();
+    } else if($URL === '/api/logout') {
+        include(ROOT.'/api/logout.php');
+        exit();
+    } else if($URL === '/apply-for-locker') {
+        include(ROOT.'/app/locker.php');
+        exit();
+    } else {
+        echo 'Sorry, This page not found';
         exit();
     }
     

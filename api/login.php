@@ -1,5 +1,8 @@
 <?php
+    require_once('../app/config/config.php');
+    
     require_once('database.php');
+
     $db = new DB();
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $postBody = file_get_contents("php://input");
@@ -15,6 +18,8 @@
                     "code" => 200
                 );
                 echo json_encode($response);
+                session_start();
+                $_SESSION['username']= $username;
                 http_response_code(200);
             } else {
                 $response = array (
