@@ -51,8 +51,9 @@
                                 <th scope="col">Durations</th>
                                 <th scope="col">Request Type</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">From</th>
-                                <th scope="col">Free Lockers</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Lockers</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -73,28 +74,39 @@
                                     </td>
                                     <td scope="col">
                                         <?php 
-                                            $startDate = date("d-m-Y", strtotime($value['reqDate']));
-                                            echo $startDate; 
+                                            $startDate = date("d-m-Y", strtotime($value['startDate']));
+                                            echo $startDate;
                                         ?>
                                     </td>
                                     <td scope="col">
-                                        <select class="form-control locker_menu" 
-                                        data-btn="user_<?php echo $value['accountId']; ?>"
-                                        data-date="<?php echo $value['reqDate']; ?>"
-                                        data-duration="<?php echo $value['duration']; ?>"
-                                        data-reqId ="<?php echo $value['id']; ?>"
                                         <?php 
-                                            $dt= date('d-m-Y');
-                                            echo (strtotime($dt) >= strtotime($value['reqDate'])) ? '' : 'disabled';
-                                        ?>>
-                                            <option value="0">Locker Ids</option>
-                                            <?php if($lockerList) {
-                                                foreach($lockerList as $key => $locker) {
-                                            ?>
-                                                <option value="<?php echo $locker['id']; ?>"><?php echo $locker['id']; ?></option>
-                                            <?php } } ?>
-                                            <?php ?>
-                                        </select>
+                                            $startDate = date("d-m-Y", strtotime($value['startDate']));
+                                            echo $startDate;
+                                        ?>
+                                    </td>
+                                    <td scope="col">
+                                        <?php if($value['lockerId']) { 
+                                            echo $value['lockerId']
+                                        ?>
+                                        <?php } else { ?>
+                                            <select class="form-control locker_menu" 
+                                            data-btn="user_<?php echo $value['accountId']; ?>"
+                                            data-date="<?php echo $value['startDate']; ?>"
+                                            data-duration="<?php echo $value['duration']; ?>"
+                                            data-reqId ="<?php echo $value['id']; ?>"
+                                            <?php 
+                                                $dt= date('d-m-Y');
+                                                echo (strtotime($dt) >= strtotime($value['startDate'])) ? '' : 'disabled';
+                                            ?>>
+                                                <option value="0">Select Locker</option>
+                                                <?php if($lockerList) {
+                                                    foreach($lockerList as $key => $locker) {
+                                                ?>
+                                                    <option value="<?php echo $locker['id']; ?>"><?php echo $locker['id']; ?></option>
+                                                <?php } } ?>
+                                                <?php ?>
+                                            </select>
+                                        <?php } ?>
                                     </td>
                                     <td scope="col">
                                         <a href="javascript:void(0)" class="btn btn-primary disabled assignLocker" id="user_<?php echo $value['accountId']; ?>">Proceed</a>

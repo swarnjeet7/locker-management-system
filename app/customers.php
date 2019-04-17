@@ -45,14 +45,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
     </div>
 </div>
 
-<?php if(isset($_SESSION['lockerReqId']) && isset($_SESSION['lockerStatus']) && $_SESSION['lockerStatus'] < 2 ) { ?>
+<?php 
+if(isset($_SESSION['lockerReqId']) && !$_SESSION['lockerStatus']) { ?>
 <div class="container-fluid mb100">
     <h3>Locker Information</h3>
     <div class="alert alert-secondary" role="alert">
         Thank you for requesting for Locker Account in Piggi Bank. Your Locker <strong>requested id is <?php echo $_SESSION['lockerReqId']; ?> </strong>for your future reference. When locker is assigned, you can see the full information about locker. 
     </div>
 </div>
-<?php } else { 
+<?php } else if(isset($_SESSION['lockerStatus']) && $_SESSION['lockerStatus'] == 1) { 
     $sql = 'SELECT * FROM locker_customer_map l WHERE l.accountId ='.$_SESSION['accId'];
     $lockerInfo = $db->query($sql)[0];
 ?>
@@ -82,7 +83,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
                             <div class="alert alert-success" role="alert">
                                 Active
                             </div>
-                        <?php } else { ?>
+                        <?php } else if($lockerInfo['isActive'] == 2) { ?>
                             <div class="alert alert-danger" role="alert">
                                 Deactivated
                             </div>

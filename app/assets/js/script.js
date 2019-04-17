@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     $('.locker_menu').change(function() {
         $('.locker_menu').not(this).prop('selectedIndex',0);
-        $('.btn.btn-primary').addClass('disabled');
+        $('.locker_menu').addClass('disabled');
         var btnId = $(this).attr('data-btn');
         if($(this).val() > 0) {
             $('#'+btnId).removeClass('disabled');

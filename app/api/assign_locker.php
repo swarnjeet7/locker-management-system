@@ -18,8 +18,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $db->query($sql);
 
     if($result) {
-        echo $sql1 = 'UPDATE locker loc SET isActive = 1 where loc.id = '.$lockerId;
-        echo $sql2 = 'UPDATE locker_request l SET status = 2 where l.id = '.$reqId;
+        $sql1 = 'UPDATE locker loc SET isActive = 1 where loc.id = '.$lockerId;
+        $sql2 = 'UPDATE locker_request l SET l.status = 1, l.lockerId = '.$lockerId.' where l.id = '.$reqId;
 
         $db->query($sql1);
         $db->query($sql2);
@@ -31,8 +31,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         );
         echo json_encode($response);
     }
-
-
 }
 
 ?>

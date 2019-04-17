@@ -12,6 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jointHolders = $params['jointHolders'];
     $jointHolderIds = '';
 
+
     $response = array(
         "status" => "success",
         "message" => "You have applied for locker successfully",
@@ -50,9 +51,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     if($jointHolders) {
         $jointHolderIds = checkAccountId($jointHolders);
     }
+    $sharedCustmrIds= empty($jointHolderIds) ? 'NULL' : $jointHolderIds;
     $requestType = $jointHolderIds == '' ? 1 : 2;
-    $sql = 'INSERT INTO locker_request (accountId, sharedCustomerIds, duration, type, reqDate)'.
-    'VALUES ('.$accountId.', '.(empty($jointHolderIds) ? 'NULL' : $jointHolderIds) .','.$duration.','.$requestType.', "'.$startDate.'")';
+    $sql = 'INSERT INTO locker_request VALUES (null ,'.$accountId.', '.$sharedCustmrIds.','.$duration.','.$requestType.', "'.$startDate.'", null, 0)';
     $db = new DB();
     $lockerReqId = $db->query($sql);
     $_SESSION['lockerReqId'] = $lockerReqId;
