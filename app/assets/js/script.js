@@ -33,6 +33,40 @@ $(document).ready(function() {
         })
     });
 
+    $("#adminLogin").click(function() {
+        // debugger
+        const username = $("#inputId").val();
+        const password = $("#inputPassword").val();
+    
+        if(!username) {
+            return alert("Please enter User Id");
+        }
+        if(!password) {
+            return alert("Please enter your password");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: '/api/admin/login',
+            data: JSON.stringify({username: username, password: password}),
+            success: function(response) {
+                console.log(response)
+                // debugger;
+                const res = JSON.parse(response);
+                if(res.status == 'success') {
+                    window.location.href = '/admin/dashboard';
+                    return;
+                }
+                if(res.status == 'error') {
+                    return alert(res.message);
+                }
+            },
+            eorror: function(response) {
+                console.log(response)
+            } 
+        })
+    });
+
     $("#applyLocker").click(function() {
         const startDate = $("#startDate").val();
         const duration = $("#duration").val();
@@ -50,7 +84,10 @@ $(document).ready(function() {
             url: '/api/apply_locker',
             data: JSON.stringify({startDate: startDate, duration: duration, jointHolders: jointHolders}),
             success: function(response) {
-                console.log(response);
+                console.log(response)
+                if(response) {
+                    window.location.href = '/'
+                }
             },
             eorror: function(response) {
                 console.log(response)
@@ -58,7 +95,49 @@ $(document).ready(function() {
         })
     });
 
-    
+    $('.locker_menu').change(function() {
+        $('.locker_menu').not(this).prop('selectedIndex',0);
+        $('.btn.btn-primary').addClass('disabled');
+        var btnId = $(this).attr('data-btn');
+        if($(this).val() > 0) {
+            $('#'+btnId).removeClass('disabled');
+        } else {
+            $('.btn.btn-primary').addClass('disabled');
+        }
+    });
+
+    $('.assignLocker').click(function(event) {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+
+        var btnId = $(this).attr('id');
+        var accountId = btnId.split('_')[1];
+        var lockerId = $('select[data-btn="'+btnId+'"]').val();
+        var startDate = $('select[data-btn="'+btnId+'"]').attr('data-date');
+        console.log(startDate);
+        if(!accountId) {
+            return alert("There is something wrong, Please check after some time");
+        }
+        if(!lockerId) {
+            return alert("Please Select locker id");
+        }
+        $.ajax({
+            method: "POST",
+            url: '/api/assign_locker',
+            data: JSON.stringify({accountId: accountId, lockerId: lockerId}),
+            success: function(response) {
+                console.log(response)
+                // if(response) {
+                //     window.location.href = '/'
+                // }
+            },
+            eorror: function(response) {
+                console.log(response)
+            } 
+        })
+    });
+
+
     if(document.getElementById("startDate")) {
         var input = document.getElementById("startDate");
         var today = new Date();

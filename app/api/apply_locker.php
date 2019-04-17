@@ -1,15 +1,16 @@
 <?php
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once(APP. '/config/config.php');
     require_once(APP. '/config/database.php');
     $LOCKER_REQUEST_STATUS = unserialize(LOCKER_STATUS);
+
     $accountId = $_SESSION['accId'];
-    $jointHolderIds = array();
     $params = file_get_contents("php://input");
     $params = json_decode($params, true);
     $startDate = $params['startDate'];
     $duration = $params['duration'];
     $jointHolders = $params['jointHolders'];
+    $jointHolderIds = '';
 
     $response = array(
         "status" => "success",
@@ -27,11 +28,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     function checkAccountId($ids) {
-        $ids = str_replace(',,', ',', str_replace(' ', '', $ids));
-        $accountIds = explode(',', $ids);
+        $j_ids = str_replace(',,', ',', str_replace(' ', '', $ids));
+        $accountIds = explode(',', $j_ids);
         $uniqueIds = array_unique($accountIds);
+        $jointIds = '';
+        $db = new DB();
         foreach($uniqueIds as $key => $id) {
-            $db = new DB();
             $result = $db->query('SELECT * FROM accounts a WHERE a.id='.$id);
             if(empty($result)) {
                 $response['status'] = 'Error';
@@ -41,21 +43,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 http_response_code(200);
                 exit();
             }
+            $jointIds .= $id;
         };
-        $jointHolderIds= $uniqueIds;
+        return $jointIds;
     };
     if($jointHolders) {
-        checkAccountId($jointHolders);
+        $jointHolderIds = checkAccountId($jointHolders);
     }
-    $date=date_create($startDate);
-    $start_date = date_format($date,"d/m/Y");
-    $requestType = empty($jointHolderIds) ? 1 : 2;    
+    $requestType = $jointHolderIds == '' ? 1 : 2;
+    $sql = 'INSERT INTO locker_request (accountId, sharedCustomerIds, duration, type, reqDate)'.
+    'VALUES ('.$accountId.', '.(empty($jointHolderIds) ? 'NULL' : $jointHolderIds) .','.$duration.','.$requestType.', "'.$startDate.'")';
     $db = new DB();
-    $lockerReqId = $db->query(
-        'INSERT INTO locker_request (accountId, sharedCustomerIds, duration, type)'.
-        'VALUES ('.$accountId.', '.(empty($jointHolderIds) ? '0' : $jointHolderIds) .','.$duration.','.$requestType.')'
-    );
-    $_SESSION['lockerId'] = $lockerReqId;
+    $lockerReqId = $db->query($sql);
+    $_SESSION['lockerReqId'] = $lockerReqId;
     echo $lockerReqId;
     exit();
 

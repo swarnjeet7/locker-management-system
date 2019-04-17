@@ -6,26 +6,22 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $postBody = file_get_contents("php://input");
         $postBody = json_decode($postBody, true);
-        $accountId = $postBody['accId'];
+        $username = $postBody['username'];
         $password = $postBody['password'];
-        $accountDetails = $db->query('SELECT a.id as accountId, c.id as customerId, l.id as lockerReqId FROM `accounts` a 
-        inner join customers c on c.id=a.customerId 
-        left join locker_request l on l.accountId=a.id 
-        where a.id='.$accountId.' and c.password="'.MD5($password).'"');
-        
-        if(!empty($accountDetails)) {
-            $accountDetails = $accountDetails[0];
+
+        $authenticate = $db->query('SELECT * FROM `admin` a where a.username = "'.$username.'" and a.password = "'.MD5($password).'"');
+        if($authenticate) {
+
             $response = array (
                 "status" => "success",
-                "message" => "User loged in successfully",
+                "message" => "You are logged in Successfully",
                 "code" => 200
             );
             echo json_encode($response);
-            $_SESSION['accId']= $accountDetails['accountId'];
-            $_SESSION['customerId']= $accountDetails['customerId'];
-            $_SESSION['lockerReqId']= $accountDetails['lockerReqId'];
+            $_SESSION['adminUsername'] = $username;
             http_response_code(200);
             exit();
+
         } else {
             $response = array (
                 "status" => "error",

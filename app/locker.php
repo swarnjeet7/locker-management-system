@@ -34,14 +34,14 @@
                 <li>Bank also has a <strong>process for allocation and cancellation</strong> of a lockers.</li>
                 <li><strong>Hassle-free payment options</strong> through your PIGGI Bank Account.</li>
                 <li>For operating a locker, a customer can give a request through the website <strong>specifying date and time of operation</strong>.</li>
-                <li><strong>Note: </strong>In general as the number of lockers are limited, therefore, bank maintains a queue of customer who have requested for the locker service.</li>
+                <li><strong>Note: </strong>In general as the number of lockers are limited, therefore, bank maintains a queue of customer who have requested for the locker service. We also check when user want to start our service. </li>
             </ul>
         </article>
         <article class="locker-info mt30">
             <div class="h3 text-info">Charges: </div>
             <ul>
                 <li>Bank charges <strong>yearly rent Rs. 2400/- only</strong> for the locker from the customer which is directly deducted from the account of the customer.</li>
-                <li>After 12 free operations, <strong>Rs. 100 per operation </strong> will be charged. This amount will be deducted from your account, in the end of the year.</li>
+                <li>After 12 free operations, <strong>Rs. 300 per operation </strong> will be charged. This amount will be deducted from your account, in the end of the year.</li>
             </ul>
         </article>
     </div>
