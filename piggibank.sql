@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2019 at 08:09 AM
+-- Generation Time: Apr 17, 2019 at 07:48 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -162,8 +162,8 @@ CREATE TABLE IF NOT EXISTS `locker_request` (
   `duration` tinyint(4) DEFAULT '1',
   `type` tinyint(4) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
-  `lockerId` int(6) DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
+  `lockerId` int(6) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
@@ -171,9 +171,9 @@ CREATE TABLE IF NOT EXISTS `locker_request` (
 -- Dumping data for table `locker_request`
 --
 
-INSERT INTO `locker_request` (`id`, `accountId`, `sharedCustomerIds`, `duration`, `type`, `startDate`, `lockerId`, `status`) VALUES
-(1, 1102, NULL, 1, 1, '2019-04-17', 102, 1),
-(2, 1103, '1105', 2, 2, '2019-04-17', NULL, 0);
+INSERT INTO `locker_request` (`id`, `accountId`, `sharedCustomerIds`, `duration`, `type`, `startDate`, `status`, `lockerId`) VALUES
+(1, 1102, NULL, 1, 1, '2019-04-17', 1, 102),
+(2, 1103, '1105', 2, 2, '2019-04-17', 0, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

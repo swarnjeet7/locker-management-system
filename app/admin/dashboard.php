@@ -22,10 +22,15 @@
             $admin = $db->query($sql)[0];
             
             if($admin) {
-                $lockerReq = $db->query('SELECT * FROM locker_request');
+                $sql1 = "SELECT l.id as id, l.accountId as accountId, l.sharedCustomerIds as sharedCustomerIds, l.duration as duration, l.type as type, l.startDate as startDate, l.status as status, l.lockerId as lockerId, m.endDate as endDate, m.isActive as isActive FROM locker_request l LEFT JOIN locker_customer_map m ON l.lockerId = m.lockerId";
+                $lockerReq = $db->query($sql1);
+                // echo "<pre>";
+                // print_r($lockerReq);
+                // die;
+                
                 if($lockerReq) {
-                    $sql1 = 'SELECT * FROM `locker` l WHERE l.isActive = 0';
-                    $lockerList = $db->query($sql1);
+                    $sql2 = 'SELECT * FROM `locker` l WHERE l.isActive = 0';
+                    $lockerList = $db->query($sql2);
                 }
             }
         }
@@ -74,21 +79,22 @@
                                     </td>
                                     <td scope="col">
                                         <?php 
-                                            $startDate = date("d-m-Y", strtotime($value['startDate']));
+                                            $startDate = date("d M Y", strtotime($value['startDate']));
                                             echo $startDate;
                                         ?>
                                     </td>
                                     <td scope="col">
                                         <?php 
-                                            $startDate = date("d-m-Y", strtotime($value['startDate']));
-                                            echo $startDate;
+                                            $endDate = date("d M Y", strtotime($value['endDate']));
+                                            echo $value['endDate'] ? $endDate : '-----';
                                         ?>
                                     </td>
                                     <td scope="col">
                                         <?php if($value['lockerId']) { 
-                                            echo $value['lockerId']
-                                        ?>
-                                        <?php } else { ?>
+                                        
+                                            echo $value['lockerId'];
+                                        
+                                        } else { ?>
                                             <select class="form-control locker_menu" 
                                             data-btn="user_<?php echo $value['accountId']; ?>"
                                             data-date="<?php echo $value['startDate']; ?>"
@@ -109,7 +115,11 @@
                                         <?php } ?>
                                     </td>
                                     <td scope="col">
-                                        <a href="javascript:void(0)" class="btn btn-primary disabled assignLocker" id="user_<?php echo $value['accountId']; ?>">Proceed</a>
+                                    <?php if($value['lockerId']) { ?>                                        
+                                        <a href="javascript:void(0)" class="btn btn-danger" id="user_<?php echo $value['accountId']; ?>">CANCEL</a>
+                                    <?php } else { ?>
+                                        <a href="javascript:void(0)" class="btn btn-primary disabled assignLocker" id="user_<?php echo $value['accountId']; ?>">PROCEED</a>
+                                    <?php } ?>
                                     </td>
                                 </tr>
                             <?php } ?>

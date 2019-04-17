@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $sharedCustmrIds= empty($jointHolderIds) ? 'NULL' : $jointHolderIds;
     $requestType = $jointHolderIds == '' ? 1 : 2;
-    $sql = 'INSERT INTO locker_request VALUES (null ,'.$accountId.', '.$sharedCustmrIds.','.$duration.','.$requestType.', "'.$startDate.'", null, 0)';
+    $sql = 'INSERT INTO locker_request VALUES (null ,'.$accountId.', '.$sharedCustmrIds.','.$duration.','.$requestType.', "'.$startDate.'", 0, null)';
     $db = new DB();
     $lockerReqId = $db->query($sql);
     $_SESSION['lockerReqId'] = $lockerReqId;

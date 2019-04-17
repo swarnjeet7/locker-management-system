@@ -74,17 +74,17 @@ if(isset($_SESSION['lockerReqId']) && !$_SESSION['lockerStatus']) { ?>
                 <tr>
                     <td scope="col"><?php echo $lockerInfo['accountId']; ?></td>
                     <td scope="col"><?php echo $lockerInfo['lockerId']; ?></td>
-                    <td scope="col"><?php echo $lockerInfo['startDate']; ?></td>
-                    <td scope="col"><?php echo $lockerInfo['endDate']; ?></td>
+                    <td scope="col"><?php echo date('d M Y', strtotime($lockerInfo['startDate'])); ?></td>
+                    <td scope="col"><?php echo date('d M Y', strtotime($lockerInfo['endDate'])); ?></td>
                     <td scope="col">
                         <?php 
                             if($lockerInfo['isActive'] == 1) {
                         ?>
-                            <div class="alert alert-success" role="alert">
+                            <div class="alert alert-success myClass" role="alert">
                                 Active
                             </div>
                         <?php } else if($lockerInfo['isActive'] == 2) { ?>
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger myClass" role="alert">
                                 Deactivated
                             </div>
                         <?php } ?>

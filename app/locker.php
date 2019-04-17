@@ -44,6 +44,16 @@
                 <li>After 12 free operations, <strong>Rs. 300 per operation </strong> will be charged. This amount will be deducted from your account, in the end of the year.</li>
             </ul>
         </article>
+        <article class="locker-info mt30">
+            <div class="h3 text-info">Cancellation Charges: </div>
+            <ul>
+                <li><strong>Up to 30 days, Rs. 400/-</strong> will be deducted and rest of the amount will be credited into your account <strong>with in 5 working days</strong></li>
+                <li><strong>From 31st day, up to 60 days, Rs. 800/-</strong> will be deducted and rest of the amount will be credited into your account <strong>with in 5 working days</strong></li>
+                <li><strong>From 61st day, up to 90 days, Rs. 1000/- </strong> will be deducted and rest of the amount will be credited into your account <strong>with in 5 working days</strong></li>
+                <li><strong>From 91st day, up to 180 days, Rs. 1600/-</strong> will be deducted and rest of the amount will be credited into your account <strong>with in 5 working days</strong></li>
+                <li><strong>After 180 days,</strong> We will <strong>not refund you any amount</strong> in <strong>any case</strong>.</li>                
+            </ul>
+        </article>
     </div>
     <script src="/app/assets/js/jquery-3.4.0.js"></script>
     <script src="/app/assets/js/bootstrap.min.js"></script>
