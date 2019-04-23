@@ -59,14 +59,15 @@ DROP TABLE IF EXISTS `locker`;
 CREATE TABLE `locker` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `freeOperations` int(2) unsigned DEFAULT NULL,
-  `peroid` int(2) unsigned DEFAULT NULL,
-  `jointType` int(1) unsigned DEFAULT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
+  `isActive` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
 
 /*Data for the table `locker` */
 
-insert  into `locker`(`id`,`freeOperations`,`peroid`,`jointType`) values (101,12,NULL,NULL),(102,12,NULL,NULL),(103,12,NULL,NULL);
+insert  into `locker`(`id`,`freeOperations`,`startDate`,`endDate`,`isActive`) values (101,12,NULL,NULL,0),(102,12,NULL,NULL,0),(103,12,NULL,NULL,0);
 
 /*Table structure for table `locker_customer_map` */
 
@@ -90,7 +91,9 @@ CREATE TABLE `locker_request` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `customerId` int(10) unsigned NOT NULL,
   `sharedCustomerIds` varchar(255) DEFAULT NULL,
-  `status` tinyint(10) DEFAULT NULL,
+  `duration` tinyint(4) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

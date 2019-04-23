@@ -18,6 +18,7 @@ $(document).ready(function() {
             data: JSON.stringify({accId: userId, password: pwd}),
             success: function(response) {
                 const res = JSON.parse(response);
+                console.log(res)
                 if(res.status == 'success') {
                     window.location.href = '/customers/'+userId;
                     return;
@@ -32,10 +33,14 @@ $(document).ready(function() {
         })
     });
 
-    $("#applyLocker").click(function() {
-        
-    });
-
-
-    
+   
 });
+window.addEventListener('beforeunload', function(){
+    // $.ajax({
+    //     method: "POST",
+    //     url: '/api/logout',
+    //     success: function(response) {
+    //         console.log(response);
+    //     } 
+    // })
+})

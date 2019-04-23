@@ -11,18 +11,18 @@
 </head>
 <body>
     <?php
-        require_once(APP.'/config/config.php');
-        require_once(ROOT.'/api/database.php');
+        require_once('config/config.php');
+        require_once('config/database.php');
         $db = new DB();
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $result = $db->query('SELECT * FROM `customers` c where c.id='.$userId)[0];
-            // print_r($result); die;
+            $customer = $db->query('SELECT * FROM customers c where c.id='.$_SESSION['customerId'])[0];
+            $balance = $db->query('SELECT * FROM accounts a where a.id='.$_SESSION['accId'])[0]['balance'];
         }
     ?>
         <div class="dashboard-header">
             <div class="container-fluid d-flex justify-content-between">
                 <div class="welcome-note">
-                    Welcome <strong><?php echo $result['firstname'].' '.$result['lastname']?></strong>
+                    Welcome <strong><?php echo $customer['firstname'].' '.$customer['lastname']?></strong>
                 </div>
                 <div class="">
                     <a class="btn btn-primary" href="/api/logout">Logout</a>
@@ -43,12 +43,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="col"><?php echo $result['id']; ?></td>
-                        <td scope="col"><?php echo $result['firstname']; ?></td>
-                        <td scope="col"><?php echo $result['lastname']; ?></td>
-                        <td scope="col"><?php echo $result['email']; ?></td>
-                        <td scope="col"><?php echo $result['mobile']; ?></td>
-                        <td scope="col"><?php echo $result['balance']; ?></td>
+                        <td scope="col"><?php echo $customer['id']; ?></td>
+                        <td scope="col"><?php echo $customer['firstname']; ?></td>
+                        <td scope="col"><?php echo $customer['lastname']; ?></td>
+                        <td scope="col"><?php echo $customer['email']; ?></td>
+                        <td scope="col"><?php echo $customer['mobile']; ?></td>
+                        <td scope="col"><?php echo number_format((float)$balance, 2, '.', ''); ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -56,7 +56,7 @@
 
         <footer class="sticky-footer">
             <div class="container-fluid">
-                <p>We recently started a new service for locker, there you can keep your valueable this in safe <a href="/apply-for-locker">click here to know more</a></p>
+                <p>We recently started a new service for locker, there you can keep your valueable this in safe <a href="/about-locker">click here to know more</a></p>
             </div>
         </footer>
 

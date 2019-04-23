@@ -19,8 +19,10 @@
                 );
                 echo json_encode($response);
                 session_start();
-                $_SESSION['accId']= $accId;
+                $_SESSION['accId']= $accountId;
+                $_SESSION['customerId']= $customerId;
                 http_response_code(200);
+                exit();
             } else {
                 $response = array (
                     "status" => "error",
