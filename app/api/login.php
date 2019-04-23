@@ -8,14 +8,10 @@
         $postBody = json_decode($postBody, true);
         $accountId = $postBody['accId'];
         $password = $postBody['password'];
-        $isAccount = $db->query('SELECT * FROM `accounts` a where a.id='.$accountId)[0];
-        if($isAccount) {
-            $customerId = $isAccount['customerId'];
-            // $password = $db->query();
-            // print_r(MD5(123456));
-            print_r('SELECT * FROM customers c where c.id='.$customerId.' AND c.password="'.MD5(number_format($password)).'"'); 
-            die;
-            if(true) {
+        $accountDetails = $db->query('SELECT * FROM `accounts` a where a.id='.$accountId)[0];
+        if($accountDetails) {
+            $customerId = $accountDetails['customerId'];
+            if($db->query('SELECT * FROM customers c where c.id='.$customerId.' AND c.password="'.MD5($password).'"')) {
                 $response = array (
                     "status" => "success",
                     "message" => "User loged in successfully",
