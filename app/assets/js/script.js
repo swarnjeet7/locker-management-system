@@ -33,14 +33,45 @@ $(document).ready(function() {
         })
     });
 
-   
+    $("#applyLocker").click(function() {
+        const startDate = $("#startDate").val();
+        const duration = $("#duration").val();
+        const jointHolders = $("#jointWith").val();
+    
+        if(!startDate) {
+            return alert("Please select date from tomorrow onwards");
+        }
+        if(!duration) {
+            return alert("Please Choose time of duration");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: '/api/apply_locker',
+            data: JSON.stringify({startDate: startDate, duration: duration, jointHolders: jointHolders}),
+            success: function(response) {
+                console.log(response);
+            },
+            eorror: function(response) {
+                console.log(response)
+            } 
+        })
+    });
+
+    
+    if(document.getElementById("startDate")) {
+        var input = document.getElementById("startDate");
+        var today = new Date();
+        var day = today.getDate();
+        // Set month to string to add leading 0
+        var mon = new String(today.getMonth()+1); //January is 0!
+        var yr = today.getFullYear();
+
+        if(mon.length < 2) { mon = "0" + mon; }
+
+        var date = new String( yr + '-' + mon + '-' + day );
+
+        input.disabled = false; 
+        input.setAttribute('min', date);
+    }
 });
-window.addEventListener('beforeunload', function(){
-    // $.ajax({
-    //     method: "POST",
-    //     url: '/api/logout',
-    //     success: function(response) {
-    //         console.log(response);
-    //     } 
-    // })
-})

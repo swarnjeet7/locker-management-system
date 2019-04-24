@@ -16,7 +16,7 @@
         $db = new DB();
         if($_SERVER['REQUEST_METHOD'] == 'GET') {
             $customer = $db->query('SELECT * FROM customers c where c.id='.$_SESSION['customerId'])[0];
-            $balance = $db->query('SELECT * FROM accounts a where a.id='.$_SESSION['accId'])[0]['balance'];
+            $account = $db->query('SELECT * FROM accounts a where a.id='.$_SESSION['accId'])[0];
         }
     ?>
         <div class="dashboard-header">
@@ -43,12 +43,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td scope="col"><?php echo $customer['id']; ?></td>
+                        <td scope="col"><?php echo $account['id']; ?></td>
                         <td scope="col"><?php echo $customer['firstname']; ?></td>
                         <td scope="col"><?php echo $customer['lastname']; ?></td>
                         <td scope="col"><?php echo $customer['email']; ?></td>
                         <td scope="col"><?php echo $customer['mobile']; ?></td>
-                        <td scope="col"><?php echo number_format((float)$balance, 2, '.', ''); ?></td>
+                        <td scope="col"><?php echo number_format((float)$account['balance'], 2, '.', ''); ?></td>
                     </tr>
                 </tbody>
             </table>
