@@ -30,6 +30,7 @@
             </div>
         </div>
         <div class="container-fluid">
+            <h3>Account Information</h3>
             <table class="table clearfix">
                 <thead class="thead-light">
                     <tr>
@@ -53,6 +54,42 @@
                 </tbody>
             </table>
         </div>
+
+        <?php if($lockerReqId) { ?>
+        <div class="container-fluid">
+            <h3>Locker Information</h3>
+            <div class="alert alert-secondary" role="alert">
+                Your Locker requested id is <?php echo $_SESSION['lockerReqId']; ?> for your future reference.
+            </div>
+        </div>
+        <?php } if($lockerId) { ?>
+            <div class="container-fluid">
+                <h3>Locker Information</h3>
+                
+                <table class="table clearfix">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">A/c No.</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email Id</th>
+                            <th scope="col">Mobile No.</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="col"><?php echo $account['id']; ?></td>
+                            <td scope="col"><?php echo $customer['firstname']; ?></td>
+                            <td scope="col"><?php echo $customer['lastname']; ?></td>
+                            <td scope="col"><?php echo $customer['email']; ?></td>
+                            <td scope="col"><?php echo $customer['mobile']; ?></td>
+                            <td scope="col"><?php echo number_format((float)$account['balance'], 2, '.', ''); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <?php }?>
 
         <footer class="sticky-footer">
             <div class="container-fluid">

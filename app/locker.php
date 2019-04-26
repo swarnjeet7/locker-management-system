@@ -13,11 +13,14 @@
     <div class="container-fluid mt30 mb50">
         <div class="header d-flex justify-content-between align-items-center">
             <h1>Welcome to PIGGI Bank Locker Service</h1>
-            <?php if(isset($_SESSION['accId'])) {?>
-                <a class="btn btn-primary" href="/apply-for-locker?userId=<?php echo $_SESSION['accId']; ?>">Apply for locker</a>
-            <?php } else { ?>
-                <a class="btn btn-primary" href="/">Login</a>
-            <?php } ?>
+            <?php 
+                if(empty($_SESSION['lockerReqId'])) {
+            ?>
+                <?php if(isset($_SESSION['accId'])) {?>
+                    <a class="btn btn-primary" href="/apply-for-locker?userId=<?php echo $_SESSION['accId']; ?>">Apply for locker</a>
+                <?php } else { ?>
+                    <a class="btn btn-primary" href="/">Login</a>
+            <?php } } ?>
         </div>
         <div class="h3 text-info mt30">Lockers</div>
         <p>Book our <strong>safe deposit lockers</strong> to keep your <strong>jewellery, important documents and other valuables protected</strong>.</p>

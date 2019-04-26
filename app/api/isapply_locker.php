@@ -1,16 +1,8 @@
 <?php
+
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once(APP. '/config/config.php');
     require_once(APP. '/config/database.php');
-    $LOCKER_REQUEST_STATUS = unserialize(LOCKER_STATUS);
-    $accountId = $_SESSION['accId'];
-    $jointHolderIds = array();
-    $params = file_get_contents("php://input");
-    $params = json_decode($params, true);
-    $startDate = $params['startDate'];
-    $duration = $params['duration'];
-    $jointHolders = $params['jointHolders'];
-
     $response = array(
         "status" => "success",
         "message" => "You have applied for locker successfully",
@@ -51,13 +43,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $start_date = date_format($date,"d/m/Y");
     $requestType = empty($jointHolderIds) ? 1 : 2;    
     $db = new DB();
-    $lockerReqId = $db->query(
+    $result = $db->query(
         'INSERT INTO locker_request (accountId, sharedCustomerIds, duration, type)'.
         'VALUES ('.$accountId.', '.(empty($jointHolderIds) ? '0' : $jointHolderIds) .','.$duration.','.$requestType.')'
     );
-    $_SESSION['lockerId'] = $lockerReqId;
-    echo $lockerReqId;
-    exit();
+    //if($db->insert_id>0)
+        echo $db->insert_id;
+    //else
+    //    echo "Error: "  . $db->error;
+    exit;
+
+
 
 } else {
     $response = array (

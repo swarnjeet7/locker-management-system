@@ -1,4 +1,5 @@
 <?php
+    error_reporting(E_ALL);
 
     if(!define("ROOT", $_SERVER['DOCUMENT_ROOT'])) {
         define("ROOT", $_SERVER['DOCUMENT_ROOT']);
@@ -28,7 +29,7 @@
         define('LOCKER_DEACTIVE', 3);
     }
 
-    if(!define('LOCKER_STATUS', serialize(array('LOCKER_PENDING' => LOCKER_PENDING, 'LOCKER_ACTIVE' => LOCKER_ACTIVE, 'LOCKER_DEACTIVE' => LOCKER_DEACTIVE )))) {
+    if(!define('LOCKER_STATUS')) {
         define('LOCKER_STATUS', serialize(array('LOCKER_PENDING' => LOCKER_PENDING, 'LOCKER_ACTIVE' => LOCKER_ACTIVE, 'LOCKER_DEACTIVE' => LOCKER_DEACTIVE )));
     }
 ?>
