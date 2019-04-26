@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `locker_customer_map`;
 CREATE TABLE `locker_customer_map` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lockerId` int(10) unsigned NOT NULL,
-  `customerId` int(10) unsigned NOT NULL,
+  `accountId` int(10) unsigned NOT NULL,
   `isActive` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -89,15 +89,17 @@ DROP TABLE IF EXISTS `locker_request`;
 
 CREATE TABLE `locker_request` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
-  `customerId` int(10) unsigned NOT NULL,
+  `accountId` int(10) unsigned NOT NULL,
   `sharedCustomerIds` varchar(255) DEFAULT NULL,
   `duration` tinyint(4) DEFAULT NULL,
   `type` tinyint(4) DEFAULT NULL,
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `locker_request` */
+
+insert  into `locker_request`(`id`,`accountId`,`sharedCustomerIds`,`duration`,`type`,`status`) values (1,1102,'0',1,1,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
