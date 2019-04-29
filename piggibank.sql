@@ -34,6 +34,23 @@ CREATE TABLE `accounts` (
 
 insert  into `accounts`(`id`,`balance`,`isActive`,`created`,`type`,`customerId`) values (1101,40250.2,1,'2019-04-22 14:14:33',1,1),(1102,125430,1,'2019-04-22 14:15:06',1,2),(1103,24000,1,'2019-04-22 14:15:23',1,3),(1104,47890,1,'2019-04-22 14:15:51',1,4),(1105,1127.9,1,'2019-04-22 14:16:16',1,5);
 
+/*Table structure for table `admin` */
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `fullname` text NOT NULL,
+  `mobile` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=125702 DEFAULT CHARSET=latin1;
+
+/*Data for the table `admin` */
+
+insert  into `admin`(`id`,`username`,`password`,`fullname`,`mobile`) values (1,'admin','e6e061838856bf47e1de730719fb2609','Swarnjeet Singh',981796895);
+
 /*Table structure for table `customers` */
 
 DROP TABLE IF EXISTS `customers`;
@@ -59,15 +76,13 @@ DROP TABLE IF EXISTS `locker`;
 CREATE TABLE `locker` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `freeOperations` int(2) unsigned DEFAULT NULL,
-  `startDate` date DEFAULT NULL,
-  `endDate` date DEFAULT NULL,
   `isActive` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
 
 /*Data for the table `locker` */
 
-insert  into `locker`(`id`,`freeOperations`,`startDate`,`endDate`,`isActive`) values (101,12,NULL,NULL,0),(102,12,NULL,NULL,0),(103,12,NULL,NULL,0);
+insert  into `locker`(`id`,`freeOperations`,`isActive`) values (101,12,1),(102,12,0),(103,12,0);
 
 /*Table structure for table `locker_customer_map` */
 
@@ -77,11 +92,15 @@ CREATE TABLE `locker_customer_map` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `lockerId` int(10) unsigned NOT NULL,
   `accountId` int(10) unsigned NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
   `isActive` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `locker_customer_map` */
+
+insert  into `locker_customer_map`(`id`,`lockerId`,`accountId`,`startDate`,`endDate`,`isActive`) values (1,101,1101,'2019-04-18','2020-04-17',1);
 
 /*Table structure for table `locker_request` */
 
@@ -91,15 +110,15 @@ CREATE TABLE `locker_request` (
   `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
   `accountId` int(10) unsigned NOT NULL,
   `sharedCustomerIds` varchar(255) DEFAULT NULL,
-  `duration` tinyint(4) DEFAULT NULL,
+  `duration` tinyint(4) DEFAULT '1',
   `type` tinyint(4) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1',
+  `reqDate` date DEFAULT NULL,
+  `lockerId` int(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `locker_request` */
-
-insert  into `locker_request`(`id`,`accountId`,`sharedCustomerIds`,`duration`,`type`,`status`) values (1,1102,'0',1,1,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

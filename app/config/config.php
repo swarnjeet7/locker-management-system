@@ -36,8 +36,8 @@
     if(!define('JOINT', 2)) {
         define('JOINT', 2);
     }
-    if(!define('REQUEST_STATUS', serialize(array(SELF=> 'Self', JOINT=> 'Joint Account')))) {
-        define('REQUEST_STATUS', serialize(array(SELF=> 'Self', JOINT=> 'Joint Account')));
+    if(!define('REQUEST_STATUS', serialize(array(SELF=> 'Self Account', JOINT=> 'Joint Account')))) {
+        define('REQUEST_STATUS', serialize(array(SELF=> 'Self Account', JOINT=> 'Joint Account')));
     }
 
 ?>

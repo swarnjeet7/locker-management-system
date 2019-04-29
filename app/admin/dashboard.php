@@ -22,7 +22,7 @@
             $admin = $db->query($sql)[0];
             
             if($admin) {
-                $lockerReq = $db->query('SELECT * FROM `locker_request` l where l.status = 1');
+                $lockerReq = $db->query('SELECT * FROM locker_request');
                 if($lockerReq) {
                     $sql1 = 'SELECT * FROM `locker` l WHERE l.isActive = 0';
                     $lockerList = $db->query($sql1);
@@ -41,7 +41,7 @@
             </div>
             <?php if($lockerReq) { ?>
                 <div class="container-fluid">
-                    <h3>Locker Request List</h3>
+                    <h3>Pending Locker Request List</h3>
                     <table class="table clearfix">
                         <thead class="thead-light">
                             <tr>
@@ -81,6 +81,8 @@
                                         <select class="form-control locker_menu" 
                                         data-btn="user_<?php echo $value['accountId']; ?>"
                                         data-date="<?php echo $value['reqDate']; ?>"
+                                        data-duration="<?php echo $value['duration']; ?>"
+                                        data-reqId ="<?php echo $value['id']; ?>"
                                         <?php 
                                             $dt= date('d-m-Y');
                                             echo (strtotime($dt) >= strtotime($value['reqDate'])) ? '' : 'disabled';
@@ -102,11 +104,7 @@
                         </tbody>
                     </table>
                 </div>
-            <?php } else { ?>
-                <div class="alert alert-primary" role="alert">
-                    We do not have any pending request yet !!! :).
-                </div>
-            <?php } ?>                
+            <?php } ?>
         </div>
 
     <script src="/app/assets/js/jquery-3.4.0.js"></script>

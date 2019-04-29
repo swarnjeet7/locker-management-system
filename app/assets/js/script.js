@@ -114,7 +114,9 @@ $(document).ready(function() {
         var accountId = btnId.split('_')[1];
         var lockerId = $('select[data-btn="'+btnId+'"]').val();
         var startDate = $('select[data-btn="'+btnId+'"]').attr('data-date');
-        console.log(startDate);
+        var duration = $('select[data-btn="'+btnId+'"]').attr('data-duration');
+        var reqId = $('select[data-btn="'+btnId+'"]').attr('data-reqId');
+
         if(!accountId) {
             return alert("There is something wrong, Please check after some time");
         }
@@ -124,12 +126,13 @@ $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: '/api/assign_locker',
-            data: JSON.stringify({accountId: accountId, lockerId: lockerId}),
+            data: JSON.stringify({accountId: accountId, lockerId: lockerId, startDate: startDate, duration: duration, reqId: reqId}),
             success: function(response) {
                 console.log(response)
-                // if(response) {
-                //     window.location.href = '/'
-                // }
+                if(response.status === 'success') {
+                    alert("Locker id "+lockerId+" is assigned to the "+ accountId);
+                    window.location.reload();
+                }
             },
             eorror: function(response) {
                 console.log(response)
